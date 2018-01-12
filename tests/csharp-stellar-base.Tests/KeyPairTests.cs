@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Stellar;
 using System;
 using System.Collections.Generic;
@@ -8,32 +8,30 @@ using System.Threading.Tasks;
 
 namespace csharp_stellar_base.Tests
 {
-    [TestFixture]
     public class KeyPairTests
     {
         private static string seed = "1123740522f11bfef6b3671f51e159ccf589ccf8965262dd5f97d1721d383dd4";
 
-
-        [Test]
+        [Fact]
         public void MasterKeyPair()
         {
             Network.CurrentNetwork = "ProjectQ";
             var keyPair = KeyPair.Master();
 
-            CollectionAssert.AreEqual(keyPair.PrivateKey, KeyPair.FromSeed("SCEQIZTB6HSQJA4QJZKUNHDRGG3WXSWKLHINW5HJYDAYRM24M62JVXE2").PrivateKey);
-            Assert.AreEqual("GD7NDO2ZZ35B22AC73KSJ7TC7C2EDRNI3HCBIPUA5NHC4GJMWGAGMP7G", keyPair.Address);
+            Assert.Equal(keyPair.PrivateKey, KeyPair.FromSeed("SCEQIZTB6HSQJA4QJZKUNHDRGG3WXSWKLHINW5HJYDAYRM24M62JVXE2").PrivateKey);
+            Assert.Equal("GD7NDO2ZZ35B22AC73KSJ7TC7C2EDRNI3HCBIPUA5NHC4GJMWGAGMP7G", keyPair.Address);
         }
 
-        [Test]
+        [Fact]
         public void TestSeed()
         {
             Network.CurrentNetwork = "ProjectQ";
             var keyPair = KeyPair.Master();
 
-            Assert.AreEqual("SCEQIZTB6HSQJA4QJZKUNHDRGG3WXSWKLHINW5HJYDAYRM24M62JVXE2", keyPair.Seed);
+            Assert.Equal("SCEQIZTB6HSQJA4QJZKUNHDRGG3WXSWKLHINW5HJYDAYRM24M62JVXE2", keyPair.Seed);
         }
 
-        [Test]
+        [Fact]
         public void TestSign()
         {
             string expectedSig = "587d4b472eeef7d07aafcd0b049640b0bb3f39784118c2e2b73a04fa2f64c9c538b4b2d0f5335e968a480021fdc23e98c0ddf424cb15d8131df8cb6c4bb58309";
@@ -41,10 +39,10 @@ namespace csharp_stellar_base.Tests
             string data = "hello world";
             byte[] sig = keypair.Sign(data);
             byte[] expected = Chaos.NaCl.CryptoBytes.FromHexString(expectedSig);
-            CollectionAssert.AreEqual(expected, sig);
+            Assert.Equal(expected, sig);
         }
 
-        [Test]
+        [Fact]
         public void TestVerifyTrue()
         {
             string sig = "587d4b472eeef7d07aafcd0b049640b0bb3f39784118c2e2b73a04fa2f64c9c538b4b2d0f5335e968a480021fdc23e98c0ddf424cb15d8131df8cb6c4bb58309";
@@ -52,21 +50,21 @@ namespace csharp_stellar_base.Tests
             string data = "hello world";
             byte[] expected = Chaos.NaCl.CryptoBytes.FromHexString(sig);
             byte[] byteData = UTF8Encoding.UTF8.GetBytes(data);
-            Assert.IsTrue(keypair.Verify(expected, byteData));
+            Assert.True(keypair.Verify(expected, byteData));
         }
 
-        [Test]
+        [Fact]
         public void TestVerifyFalse()
         {
             string badSig = "687d4b472eeef7d07aafcd0b049640b0bb3f39784118c2e2b73a04fa2f64c9c538b4b2d0f5335e968a480021fdc23e98c0ddf424cb15d8131df8cb6c4bb58309";
             byte[] corrupt = { 0x00 };
             string data = "hello world";
             KeyPair keypair = KeyPair.FromRawSeed(Chaos.NaCl.CryptoBytes.FromHexString(seed));
-            Assert.IsFalse(keypair.Verify(Encoding.UTF8.GetBytes(data), Chaos.NaCl.CryptoBytes.FromHexString(badSig)));
-            Assert.IsFalse(keypair.Verify(Encoding.UTF8.GetBytes(data), corrupt));
+            Assert.False(keypair.Verify(Encoding.UTF8.GetBytes(data), Chaos.NaCl.CryptoBytes.FromHexString(badSig)));
+            Assert.False(keypair.Verify(Encoding.UTF8.GetBytes(data), corrupt));
         }
 
-        [Test]
+        [Fact]
         public void TestFromSecretSeed()
         {
             var keypairs = new Dictionary<string, string>();
@@ -80,8 +78,8 @@ namespace csharp_stellar_base.Tests
             {
                 string address = pair.Value;
                 KeyPair keypair = KeyPair.FromSeed(pair.Key);
-                Assert.AreEqual(address, keypair.Address);
-                Assert.AreEqual(pair.Key, keypair.Seed);
+                Assert.Equal(address, keypair.Address);
+                Assert.Equal(pair.Key, keypair.Seed);
             }
         }
     }

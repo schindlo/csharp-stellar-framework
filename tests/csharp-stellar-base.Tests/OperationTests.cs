@@ -1,14 +1,13 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Stellar;
 using System;
 using System.Text;
 
 namespace csharp_stellar_base.Tests
 {
-    [TestFixture]
     public class OperationTests
     {
-        [Test]
+        [Fact]
         public void ChangeTrustOperation()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -22,24 +21,24 @@ namespace csharp_stellar_base.Tests
                 .SetSourceAccount(source)
                 .Build();
 
-            Assert.AreEqual(source.Address, operation.SourceAccount.Address);
-            Assert.AreEqual(assetCode, operation.Asset.Code);
-            Assert.AreEqual(asset.Issuer.Address, operation.Asset.Issuer.Address);
-            Assert.AreEqual(asset.Type, operation.Asset.Type);
-            Assert.AreEqual(limit, operation.Limit);
-            Assert.AreEqual("AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAYAAAABRVVSAAAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAAAAABk",
+            Assert.Equal(source.Address, operation.SourceAccount.Address);
+            Assert.Equal(assetCode, operation.Asset.Code);
+            Assert.Equal(asset.Issuer.Address, operation.Asset.Issuer.Address);
+            Assert.Equal(asset.Type, operation.Asset.Type);
+            Assert.Equal(limit, operation.Limit);
+            Assert.Equal("AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAYAAAABRVVSAAAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAAAAABk",
                     operation.ToXdrBase64());
 
             Stellar.Generated.Operation xdr = operation.ToXDR();
             ChangeTrustOperation parsedOperation = Stellar.ChangeTrustOperation.FromXDR(xdr);
 
-            Assert.AreEqual(source.Address, parsedOperation.SourceAccount.Address);
-            Assert.AreEqual("EUR", parsedOperation.Asset.Code);
-            Assert.AreEqual(source.Address, parsedOperation.Asset.Issuer.Address);
-            Assert.AreEqual(limit, parsedOperation.Limit);
+            Assert.Equal(source.Address, parsedOperation.SourceAccount.Address);
+            Assert.Equal("EUR", parsedOperation.Asset.Code);
+            Assert.Equal(source.Address, parsedOperation.Asset.Issuer.Address);
+            Assert.Equal(limit, parsedOperation.Limit);
         }
 
-        [Test]
+        [Fact]
         public void ChangeTrustOperationNullAsset()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -50,10 +49,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<NullReferenceException>(() => new ChangeTrustOperation.Builder(null, limit)
                 .SetSourceAccount(source)
                 .Build());
-            Assert.AreEqual(ex.Message, "asset cannot be null.");
+            Assert.Equal(ex.Message, "asset cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void ChangeTrustOperationNegativeLimit()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -64,10 +63,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<ArgumentException>(() => new ChangeTrustOperation.Builder(asset, -1)
                 .SetSourceAccount(source)
                 .Build());
-            Assert.AreEqual(ex.Message, "limit must be non-negative.");
+            Assert.Equal(ex.Message, "limit must be non-negative.");
         }
 
-        [Test]
+        [Fact]
         public void ChangeTrustOperationNullSource()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -80,10 +79,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<NullReferenceException>(() => new ChangeTrustOperation.Builder(asset, limit)
                 .SetSourceAccount(null)
                 .Build());
-            Assert.AreEqual(ex.Message, "sourceAccount cannot be null.");
+            Assert.Equal(ex.Message, "sourceAccount cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void CreateAccountOperation()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -96,21 +95,21 @@ namespace csharp_stellar_base.Tests
                 .SetSourceAccount(source)
                 .Build();
 
-            Assert.AreEqual(source.Address, operation.SourceAccount.Address);
-            Assert.AreEqual(destination.Address, operation.Destination.Address);
-            Assert.AreEqual(balance, operation.StartingBalance);
-            Assert.AreEqual("AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAAAAAAA7eBSYbzcL5UKo7oXO24y1ckX+XuCtkDsyNHOp1n1bxAAAAAAAAAD6A==",
+            Assert.Equal(source.Address, operation.SourceAccount.Address);
+            Assert.Equal(destination.Address, operation.Destination.Address);
+            Assert.Equal(balance, operation.StartingBalance);
+            Assert.Equal("AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAAAAAAA7eBSYbzcL5UKo7oXO24y1ckX+XuCtkDsyNHOp1n1bxAAAAAAAAAD6A==",
                     operation.ToXdrBase64());
 
             Stellar.Generated.Operation xdr = operation.ToXDR();
             CreateAccountOperation parsedOperation = Stellar.CreateAccountOperation.FromXDR(xdr);
 
-            Assert.AreEqual(source.Address, parsedOperation.SourceAccount.Address);
-            Assert.AreEqual(destination.Address, parsedOperation.Destination.Address);
-            Assert.AreEqual(1000, parsedOperation.StartingBalance);
+            Assert.Equal(source.Address, parsedOperation.SourceAccount.Address);
+            Assert.Equal(destination.Address, parsedOperation.Destination.Address);
+            Assert.Equal(1000, parsedOperation.StartingBalance);
         }
 
-        [Test]
+        [Fact]
         public void CreateAccountOperationNullDestination()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -120,10 +119,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<NullReferenceException>(() => new CreateAccountOperation.Builder(null, balance)
                 .SetSourceAccount(source)
                 .Build());
-            Assert.AreEqual(ex.Message, "destination cannot be null.");
+            Assert.Equal(ex.Message, "destination cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void CreateAccountOperationNegativeStartingBalance()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -134,10 +133,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<ArgumentException>(() => new CreateAccountOperation.Builder(destination, -1)
                 .SetSourceAccount(source)
                 .Build());
-            Assert.AreEqual(ex.Message, "startingBalance must be non-negative.");
+            Assert.Equal(ex.Message, "startingBalance must be non-negative.");
         }
 
-        [Test]
+        [Fact]
         public void CreateAccountOperationNullSource()
         {
             // GDW6AUTBXTOC7FIKUO5BOO3OGLK4SF7ZPOBLMQHMZDI45J2Z6VXRB5NR
@@ -147,10 +146,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<NullReferenceException>(() => new CreateAccountOperation.Builder(destination, balance)
                 .SetSourceAccount(null)
                 .Build());
-            Assert.AreEqual(ex.Message, "sourceAccount cannot be null.");
+            Assert.Equal(ex.Message, "sourceAccount cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void PaymentOperation()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -165,24 +164,24 @@ namespace csharp_stellar_base.Tests
                 .SetSourceAccount(source)
                 .Build();
 
-            Assert.AreEqual(source.Address, operation.SourceAccount.Address);
-            Assert.AreEqual(destination.Address, operation.Destination.Address);
-            Assert.AreEqual(asset.Type, operation.Asset.Type);
-            Assert.AreEqual(amount, operation.Amount);
-            Assert.AreEqual(
+            Assert.Equal(source.Address, operation.SourceAccount.Address);
+            Assert.Equal(destination.Address, operation.Destination.Address);
+            Assert.Equal(asset.Type, operation.Asset.Type);
+            Assert.Equal(amount, operation.Amount);
+            Assert.Equal(
                     "AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAEAAAAA7eBSYbzcL5UKo7oXO24y1ckX+XuCtkDsyNHOp1n1bxAAAAAAAAAAAAAAA+g=",
                     operation.ToXdrBase64());
 
             Stellar.Generated.Operation xdr = operation.ToXDR();
             PaymentOperation parsedOperation = Stellar.PaymentOperation.FromXDR(xdr);
 
-            Assert.AreEqual(source.Address, parsedOperation.SourceAccount.Address);
-            Assert.AreEqual(destination.Address, parsedOperation.Destination.Address);
-            Assert.AreEqual(asset.Type, parsedOperation.Asset.Type);
-            Assert.AreEqual(amount, parsedOperation.Amount);
+            Assert.Equal(source.Address, parsedOperation.SourceAccount.Address);
+            Assert.Equal(destination.Address, parsedOperation.Destination.Address);
+            Assert.Equal(asset.Type, parsedOperation.Asset.Type);
+            Assert.Equal(amount, parsedOperation.Amount);
         }
 
-        [Test]
+        [Fact]
         public void PaymentOperationNullDestination()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -194,10 +193,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<NullReferenceException>(() => new PaymentOperation.Builder(null, asset, amount)
                 .SetSourceAccount(source)
                 .Build());
-            Assert.AreEqual(ex.Message, "destination cannot be null.");
+            Assert.Equal(ex.Message, "destination cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void PaymentOperationNullAsset()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -210,10 +209,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<NullReferenceException>(() => new PaymentOperation.Builder(destination, null, amount)
                 .SetSourceAccount(source)
                 .Build());
-            Assert.AreEqual(ex.Message, "asset cannot be null.");
+            Assert.Equal(ex.Message, "asset cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void PaymentOperationNegativeAmount()
         {
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
@@ -226,10 +225,10 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<ArgumentException>(() => new PaymentOperation.Builder(destination, asset, -1)
                 .SetSourceAccount(source)
                 .Build());
-            Assert.AreEqual(ex.Message, "amount must be non-negative.");
+            Assert.Equal(ex.Message, "amount must be non-negative.");
         }
 
-        [Test]
+        [Fact]
         public void PaymentOperationNullSource()
         {
             // GDW6AUTBXTOC7FIKUO5BOO3OGLK4SF7ZPOBLMQHMZDI45J2Z6VXRB5NR
@@ -241,7 +240,7 @@ namespace csharp_stellar_base.Tests
             var ex = Assert.Throws<NullReferenceException>(() => new PaymentOperation.Builder(destination, asset, amount)
                 .SetSourceAccount(null)
                 .Build());
-            Assert.AreEqual(ex.Message, "sourceAccount cannot be null.");
+            Assert.Equal(ex.Message, "sourceAccount cannot be null.");
         }
     }
 }

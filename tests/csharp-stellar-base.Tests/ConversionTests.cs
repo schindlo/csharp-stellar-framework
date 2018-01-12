@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Stellar;
 using System;
 using System.Collections.Generic;
@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace csharp_stellar_base.Tests
 {
-    [TestFixture]
     public class ConversionTests
     {
-        [Test]
+        [Fact]
         public void AccountIdConversion()
         {
             Stellar.Network.CurrentNetwork = "ProjectQ";
@@ -25,11 +24,11 @@ namespace csharp_stellar_base.Tests
             var reader = new Stellar.Generated.ByteReader(sample);
             var sampleAccount = Stellar.Generated.AccountID.Decode(reader);
 
-            Assert.AreEqual(
+            Assert.Equal(
                 masterAccount.InnerValue.Discriminant.InnerValue,
                 sampleAccount.InnerValue.Discriminant.InnerValue);
 
-            CollectionAssert.AreEqual(
+            Assert.Equal(
                 masterAccount.InnerValue.Ed25519.InnerValue,
                 sampleAccount.InnerValue.Ed25519.InnerValue);
 
@@ -37,10 +36,10 @@ namespace csharp_stellar_base.Tests
             Stellar.Generated.AccountID.Encode(writer, masterAccount);
             string master64 = Convert.ToBase64String(writer.ToArray());
 
-            Assert.AreEqual(sample64, master64);
+            Assert.Equal(sample64, master64);
         }
 
-        [Test]
+        [Fact]
         public void NativeAssetConversion()
         {
             Stellar.Network.CurrentNetwork = "";
@@ -53,7 +52,7 @@ namespace csharp_stellar_base.Tests
             var reader = new Stellar.Generated.ByteReader(sample);
             var sampleAsset = Stellar.Generated.Asset.Decode(reader);
 
-            Assert.AreEqual(
+            Assert.Equal(
                 native.Discriminant.InnerValue,
                 sampleAsset.Discriminant.InnerValue);
 
@@ -61,10 +60,10 @@ namespace csharp_stellar_base.Tests
             Stellar.Generated.Asset.Encode(writer, native);
             string native64 = Convert.ToBase64String(writer.ToArray());
 
-            Assert.AreEqual(sample64, native64);
+            Assert.Equal(sample64, native64);
         }
 
-        [Test]
+        [Fact]
         public void CustomAssetConversion()
         {
             Stellar.Network.CurrentNetwork = "ProjectQ";
@@ -88,15 +87,15 @@ namespace csharp_stellar_base.Tests
             var reader = new Stellar.Generated.ByteReader(sample);
             var sampleAsset = Stellar.Generated.Asset.Decode(reader);
 
-            Assert.AreEqual(
+            Assert.Equal(
                 asset.Discriminant.InnerValue,
                 sampleAsset.Discriminant.InnerValue);
 
-            CollectionAssert.AreEqual(
+            Assert.Equal(
                 asset.AlphaNum4.AssetCode,
                 sampleAsset.AlphaNum4.AssetCode);
 
-            CollectionAssert.AreEqual(
+            Assert.Equal(
                 asset.AlphaNum4.Issuer.InnerValue.Ed25519.InnerValue,
                 sampleAsset.AlphaNum4.Issuer.InnerValue.Ed25519.InnerValue);
 
@@ -104,7 +103,7 @@ namespace csharp_stellar_base.Tests
             Stellar.Generated.Asset.Encode(writer, asset);
             string native64 = Convert.ToBase64String(writer.ToArray());
 
-            Assert.AreEqual(sample64, native64);
+            Assert.Equal(sample64, native64);
         }
     }
 }

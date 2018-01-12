@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Stellar;
 using Stellar.Generated;
 using System;
@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace csharp_stellar_base.Tests
 {
-    [TestFixture]
     public class TransactionTests
     {
         public TransactionTests()
@@ -39,7 +38,7 @@ namespace csharp_stellar_base.Tests
             return transaction;
         }
 
-        [Test]
+        [Fact]
         public void SignatureBaseTest()
         {
             var transaction = SampleTransaction("GDICFS3KJ3ZTW4COVPUX7OCOAZKLLNFAM5FIYSN5FKKM7M7QNXLBPCCH");
@@ -55,12 +54,12 @@ namespace csharp_stellar_base.Tests
             var reader = new Stellar.Generated.ByteReader(sigSample);
             var sampleTx = Stellar.Generated.Transaction.Decode(reader);
 
-            CollectionAssert.AreEqual(writer.ToArray(), sigSample);
+            Assert.Equal(writer.ToArray(), sigSample);
 
-            Assert.AreEqual(sigSample64, sig64);
+            Assert.Equal(sigSample64, sig64);
         }
 
-        [Test]
+        [Fact]
         public void HashTest()
         {
             var transaction = SampleTransaction("GDICFS3KJ3ZTW4COVPUX7OCOAZKLLNFAM5FIYSN5FKKM7M7QNXLBPCCH");
@@ -70,7 +69,7 @@ namespace csharp_stellar_base.Tests
 
             string hashSample64 = "bMPzusbyC+LYcRcxTilrKuSSKTwMVE+vbFdN745w1to=";
 
-            Assert.AreEqual(hashSample64, hash64);
+            Assert.Equal(hashSample64, hash64);
         }
     }
 }

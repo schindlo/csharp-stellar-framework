@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Stellar;
 using System;
 using System.Collections.Generic;
@@ -8,101 +8,100 @@ using System.Threading.Tasks;
 
 namespace csharp_stellar_base.Tests
 {
-    [TestFixture]
     public class AssetTests
     {
-        [Test]
+        [Fact]
         public void TestNativeAsset()
         {
             Asset asset = new Asset();
 
-            Assert.AreEqual(Asset.AssetTypeEnum.ASSET_TYPE_NATIVE, asset.Type);
+            Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_NATIVE, asset.Type);
 
             Stellar.Generated.Asset genAsset = asset.ToXDR();
 
-            Assert.AreEqual(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_NATIVE, genAsset.Discriminant.InnerValue);
+            Assert.Equal(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_NATIVE, genAsset.Discriminant.InnerValue);
 
             Asset resAsset = Asset.FromXDR(genAsset);
 
-            Assert.AreEqual(Asset.AssetTypeEnum.ASSET_TYPE_NATIVE, resAsset.Type);
+            Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_NATIVE, resAsset.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestAlphaNum4Asset()
         {
             var keyPair = KeyPair.Master();
             string code = "Test";
             Asset asset = new Asset(code, keyPair);
 
-            Assert.AreEqual(code, asset.Code);
-            Assert.AreEqual(keyPair, asset.Issuer);
-            Assert.AreEqual(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, asset.Type);
+            Assert.Equal(code, asset.Code);
+            Assert.Equal(keyPair, asset.Issuer);
+            Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, asset.Type);
 
             Stellar.Generated.Asset genAsset = asset.ToXDR();
 
-            Assert.AreEqual(Encoding.ASCII.GetBytes(code).ToString(), genAsset.AlphaNum4.AssetCode.ToString());
-            Assert.AreEqual(keyPair.PublicKey.ToString(), genAsset.AlphaNum4.Issuer.InnerValue.Ed25519.InnerValue.ToString());
-            Assert.AreEqual(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, genAsset.Discriminant.InnerValue);
+            Assert.Equal(Encoding.ASCII.GetBytes(code).ToString(), genAsset.AlphaNum4.AssetCode.ToString());
+            Assert.Equal(keyPair.PublicKey.ToString(), genAsset.AlphaNum4.Issuer.InnerValue.Ed25519.InnerValue.ToString());
+            Assert.Equal(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, genAsset.Discriminant.InnerValue);
 
             Asset resAsset = Asset.FromXDR(genAsset);
 
-            Assert.AreEqual(code, resAsset.Code);
-            Assert.AreEqual(keyPair.Address, resAsset.Issuer.Address, keyPair.Address);
-            Assert.AreEqual(keyPair.PublicKey.ToString(), resAsset.Issuer.PublicKey.ToString());
-            Assert.AreEqual(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, resAsset.Type);
+            Assert.Equal(code, resAsset.Code);
+            Assert.Equal(keyPair.Address, resAsset.Issuer.Address);
+            Assert.Equal(keyPair.PublicKey.ToString(), resAsset.Issuer.PublicKey.ToString());
+            Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, resAsset.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestAlphaNum12Asset()
         {
             var keyPair = KeyPair.Master();
             string code = "TestTestTest";
             Asset asset = new Asset(code, keyPair);
 
-            Assert.AreEqual(code, asset.Code);
-            Assert.AreEqual(keyPair, asset.Issuer);
-            Assert.AreEqual(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, asset.Type);
+            Assert.Equal(code, asset.Code);
+            Assert.Equal(keyPair, asset.Issuer);
+            Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, asset.Type);
 
             Stellar.Generated.Asset genAsset = asset.ToXDR();
 
-            Assert.AreEqual(Encoding.ASCII.GetBytes(code).ToString(), genAsset.AlphaNum12.AssetCode.ToString());
-            Assert.AreEqual(keyPair.PublicKey.ToString(), genAsset.AlphaNum12.Issuer.InnerValue.Ed25519.InnerValue.ToString());
-            Assert.AreEqual(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, genAsset.Discriminant.InnerValue);
+            Assert.Equal(Encoding.ASCII.GetBytes(code).ToString(), genAsset.AlphaNum12.AssetCode.ToString());
+            Assert.Equal(keyPair.PublicKey.ToString(), genAsset.AlphaNum12.Issuer.InnerValue.Ed25519.InnerValue.ToString());
+            Assert.Equal(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, genAsset.Discriminant.InnerValue);
 
             Asset resAsset = Asset.FromXDR(genAsset);
 
-            Assert.AreEqual(code, resAsset.Code);
-            Assert.AreEqual(keyPair.Address, resAsset.Issuer.Address);
-            Assert.AreEqual(keyPair.PublicKey.ToString(), resAsset.Issuer.PublicKey.ToString());
-            Assert.AreEqual(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, resAsset.Type);
+            Assert.Equal(code, resAsset.Code);
+            Assert.Equal(keyPair.Address, resAsset.Issuer.Address);
+            Assert.Equal(keyPair.PublicKey.ToString(), resAsset.Issuer.PublicKey.ToString());
+            Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, resAsset.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestAlphaNumAssetNullCode()
         {
             var ex = Assert.Throws<NullReferenceException>(() => new Asset(null, KeyPair.Master()));
-            Assert.AreEqual(ex.Message, "code cannot be null.");
+            Assert.Equal(ex.Message, "code cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void TestAlphaNumAssetShortCode()
         {
             var ex = Assert.Throws<ArgumentException>(() => new Asset("", KeyPair.Master()));
-            Assert.AreEqual(ex.Message, "Invalid code, should have positive length, no larger than 12.");
+            Assert.Equal(ex.Message, "Invalid code, should have positive length, no larger than 12.");
         }
 
-        [Test]
+        [Fact]
         public void TestAlphaNumAssetLongCode()
         {
             var ex = Assert.Throws<ArgumentException>(() => new Asset("ThisIsTooLongACode", KeyPair.Master()));
-            Assert.AreEqual(ex.Message, "Invalid code, should have positive length, no larger than 12.");
+            Assert.Equal(ex.Message, "Invalid code, should have positive length, no larger than 12.");
         }
 
-        [Test]
+        [Fact]
         public void TestAlphaNumAssetNullIssuer()
         {
             var ex = Assert.Throws<NullReferenceException>(() => new Asset("Test", null));
-            Assert.AreEqual(ex.Message, "issuer cannot be null.");
+            Assert.Equal(ex.Message, "issuer cannot be null.");
         }
     }
 }

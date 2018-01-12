@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Stellar;
 using System;
 using System.Collections.Generic;
@@ -8,145 +8,144 @@ using System.Threading.Tasks;
 
 namespace csharp_stellar_base.Tests
 {
-    [TestFixture]
     public class MemoTests
     {
-        [Test]
+        [Fact]
         public void TestMemoNone()
         {
             Memo memo = Memo.MemoNone();
 
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_NONE, memo.Type);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_NONE, memo.Type);
 
             Stellar.Generated.Memo genMemo = memo.ToXDR();
 
-            Assert.AreEqual(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_NONE, genMemo.Discriminant.InnerValue);
+            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_NONE, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_NONE, resMemo.Type);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_NONE, resMemo.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestMemoText()
         {
             string text = "Test";
             Memo memo = Memo.MemoText(text);
 
-            Assert.AreEqual(text, memo.Text);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_TEXT, memo.Type);
+            Assert.Equal(text, memo.Text);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_TEXT, memo.Type);
 
             Stellar.Generated.Memo genMemo = memo.ToXDR();
 
-            Assert.AreEqual(text, genMemo.Text);
-            Assert.AreEqual(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_TEXT, genMemo.Discriminant.InnerValue);
+            Assert.Equal(text, genMemo.Text);
+            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_TEXT, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
-            Assert.AreEqual(text, resMemo.Text);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_TEXT, resMemo.Type);
+            Assert.Equal(text, resMemo.Text);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_TEXT, resMemo.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestMemoTextNull()
         {
             var ex = Assert.Throws<NullReferenceException>(() => Memo.MemoText(null));
-            Assert.AreEqual(ex.Message, "textorhash cannot be null.");
+            Assert.Equal(ex.Message, "textorhash cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void TestMemoId()
         {
             long id = 1234567890;
             Memo memo = Memo.MemoId(id);
 
-            Assert.AreEqual(id, memo.Id);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_ID, memo.Type);
+            Assert.Equal(id, memo.Id);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_ID, memo.Type);
 
             Stellar.Generated.Memo genMemo = memo.ToXDR();
 
-            Assert.AreEqual(new Stellar.Generated.Uint64((ulong)id).InnerValue, genMemo.Id.InnerValue);
-            Assert.AreEqual(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_ID, genMemo.Discriminant.InnerValue);
+            Assert.Equal(new Stellar.Generated.Uint64((ulong)id).InnerValue, genMemo.Id.InnerValue);
+            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_ID, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
-            Assert.AreEqual(id, resMemo.Id);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_ID, resMemo.Type);
+            Assert.Equal(id, resMemo.Id);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_ID, resMemo.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestMemoIdNegative()
         {
             var ex = Assert.Throws<ArgumentException>(() => Memo.MemoId(-1));
-            Assert.AreEqual(ex.Message, "id must be non-negative.");
+            Assert.Equal(ex.Message, "id must be non-negative.");
         }
 
-        [Test]
+        [Fact]
         public void TestMemoHash()
         {
             string hash = "TestHashTestHashTestHashTestHash";
             Memo memo = Memo.MemoHash(hash);
 
-            Assert.AreEqual(hash, memo.Hash);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_HASH, memo.Type);
+            Assert.Equal(hash, memo.Hash);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_HASH, memo.Type);
 
             Stellar.Generated.Memo genMemo = memo.ToXDR();
 
-            Assert.AreEqual(Encoding.ASCII.GetBytes(hash).ToString(), genMemo.Hash.InnerValue.ToString());
-            Assert.AreEqual(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_HASH, genMemo.Discriminant.InnerValue);
+            Assert.Equal(Encoding.ASCII.GetBytes(hash).ToString(), genMemo.Hash.InnerValue.ToString());
+            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_HASH, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
-            Assert.AreEqual(hash, resMemo.Hash);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_HASH, resMemo.Type);
+            Assert.Equal(hash, resMemo.Hash);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_HASH, resMemo.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestMemoHashNone()
         {
             var ex = Assert.Throws<NullReferenceException>(() => Memo.MemoHash(null));
-            Assert.AreEqual(ex.Message, "textorhash cannot be null.");
+            Assert.Equal(ex.Message, "textorhash cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void TestMemoHashWrong()
         {
             var ex = Assert.Throws<ArgumentException>(() => Memo.MemoHash("Wrong"));
-            Assert.AreEqual(ex.Message, "Invalid hash.");
+            Assert.Equal(ex.Message, "Invalid hash.");
         }
 
-        [Test]
+        [Fact]
         public void TestMemoReturnHash()
         {
             string retHash = "TestHashTestHashTestHashTestHash";
             Memo memo = Memo.MemoReturnHash(retHash);
 
-            Assert.AreEqual(retHash, memo.RetHash);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_RETURN, memo.Type);
+            Assert.Equal(retHash, memo.RetHash);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_RETURN, memo.Type);
 
             Stellar.Generated.Memo genMemo = memo.ToXDR();
 
-            Assert.AreEqual(Encoding.ASCII.GetBytes(retHash).ToString(), genMemo.RetHash.InnerValue.ToString());
-            Assert.AreEqual(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_RETURN, genMemo.Discriminant.InnerValue);
+            Assert.Equal(Encoding.ASCII.GetBytes(retHash).ToString(), genMemo.RetHash.InnerValue.ToString());
+            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_RETURN, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
-            Assert.AreEqual(retHash, resMemo.RetHash);
-            Assert.AreEqual(Memo.MemoTypeEnum.MEMO_RETURN, resMemo.Type);
+            Assert.Equal(retHash, resMemo.RetHash);
+            Assert.Equal(Memo.MemoTypeEnum.MEMO_RETURN, resMemo.Type);
         }
 
-        [Test]
+        [Fact]
         public void TestMemoReturnHashNone()
         {
             var ex = Assert.Throws<NullReferenceException>(() => Memo.MemoReturnHash(null));
-            Assert.AreEqual(ex.Message, "textorhash cannot be null.");
+            Assert.Equal(ex.Message, "textorhash cannot be null.");
         }
 
-        [Test]
+        [Fact]
         public void TestMemoReturnHashWrong()
         {
             var ex = Assert.Throws<ArgumentException>(() => Memo.MemoReturnHash("Wrong"));
-            Assert.AreEqual(ex.Message, "Invalid retHash.");
+            Assert.Equal(ex.Message, "Invalid retHash.");
         }
     }
 }
