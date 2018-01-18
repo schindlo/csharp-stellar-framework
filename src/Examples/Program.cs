@@ -134,5 +134,28 @@ namespace Examples
 
             Console.WriteLine(response.ReasonPhrase);
         }
+
+        static void MergeAccount(Account source, KeyPair destination)
+        {
+            var operation =
+                new AccountMergeOperation.Builder(destination)
+                .SetSourceAccount(source.KeyPair)
+                .Build();
+
+            source.IncrementSequenceNumber();
+
+            Stellar.Transaction transaction =
+                new Stellar.Transaction.Builder(source)
+                .AddOperation(operation)
+                .Build();
+
+            transaction.Sign(source.KeyPair);
+
+            var tx = transaction.ToEnvelopeXdrBase64();
+
+            var response = PostResult(tx);
+
+            Console.WriteLine(response.ReasonPhrase);
+        }
     }
 }
