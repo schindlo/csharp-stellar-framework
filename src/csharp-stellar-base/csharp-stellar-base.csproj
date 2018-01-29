@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>stellar-sdk</PackageId>
+    <PackageId>stellar-base</PackageId>
     <Authors>Jan Rothen</Authors>
-    <Description>.NET Core Stellar SDK</Description>
+    <Description>.NET Core Stellar Base</Description>
     <PackOnBuild>true</PackOnBuild>
     <PackageVersion>0.1.0</PackageVersion>
   </PropertyGroup>
