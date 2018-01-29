@@ -2,10 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>stellar-base</PackageId>
+    <Authors>Jan Rothen</Authors>
+    <Description>.NET Core Stellar Base</Description>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>0.1.0</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\generated\generated.csproj" />
     <ProjectReference Include="..\..\Chaos.NaCl\Chaos.NaCl\Chaos.NaCl.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
   </ItemGroup>
 </Project>
