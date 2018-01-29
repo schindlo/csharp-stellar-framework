@@ -41,11 +41,13 @@ namespace StellarSdk
                 {
                     return await response.Content.ReadAsStringAsync();
                 }
+                else if(((int)response.StatusCode) == 404)
+                {
+                    throw new ResourceNotFoundException();
+                }
                 else
                 {
-                    // TODO
-                    Console.WriteLine("Error: " + response.StatusCode);
-                    return "Error";
+                    throw new TechnicalException("Error from REST API: " + response.StatusCode);
                 }
             }
         }

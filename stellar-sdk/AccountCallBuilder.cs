@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using StellarSdk.Model;
 
 namespace StellarSdk
@@ -17,9 +18,10 @@ namespace StellarSdk
             return this;
         }
 
-        public AccountDetails Call()
+        public async Task<AccountDetails> Call()
         {
-            return AccountDetails.FromJson(base.DoCall().Result);
+            var txt = await base.DoCall();
+            return AccountDetails.FromJson(txt);
         }
     }
 }
