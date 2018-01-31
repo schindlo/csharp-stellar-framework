@@ -8,7 +8,7 @@ namespace StellarSdk
     {
         public AccountCallBuilder(String serverUrl) : base(serverUrl)
         {
-
+            isIdempotent = true;
         }
 
         public AccountCallBuilder accountId(String id)
