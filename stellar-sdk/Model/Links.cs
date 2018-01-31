@@ -2,10 +2,22 @@
 
 namespace StellarSdk.Model
 {
-    public partial class Links
+    public class Links
     {
+        [JsonProperty("account")]
+        public LinksData Account { get; set; }
+
+        [JsonProperty("ledger")]
+        public LinksData Ledger { get; set; }
+
+        [JsonProperty("precedes")]
+        public LinksData Precedes { get; set; }
+
         [JsonProperty("self")]
-        public Self Self { get; set; }
+        public LinksData Self { get; set; }
+
+        [JsonProperty("succeeds")]
+        public LinksData Succeeds { get; set; }
 
         [JsonProperty("transactions")]
         public LinksData Transactions { get; set; }

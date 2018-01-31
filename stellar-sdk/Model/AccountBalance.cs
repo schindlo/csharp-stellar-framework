@@ -2,7 +2,7 @@
 
 namespace StellarSdk.Model
 {
-    public partial class AccountBalance
+    public class AccountBalance
     {
         [JsonProperty("balance")]
         public string Balance { get; set; }

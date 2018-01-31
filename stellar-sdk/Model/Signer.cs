@@ -2,7 +2,7 @@
 
 namespace StellarSdk.Model
 {
-    public partial class Signer
+    public class Signer
     {
         [JsonProperty("public_key")]
         public string PublicKey { get; set; }

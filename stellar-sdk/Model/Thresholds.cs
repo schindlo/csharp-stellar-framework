@@ -2,7 +2,7 @@
 
 namespace StellarSdk.Model
 {
-    public partial class Thresholds
+    public class Thresholds
     {
         [JsonProperty("low_threshold")]
         public long LowThreshold { get; set; }

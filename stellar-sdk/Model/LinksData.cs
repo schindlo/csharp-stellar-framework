@@ -2,7 +2,7 @@
 
 namespace StellarSdk.Model
 {
-    public partial class LinksData
+    public class LinksData
     {
         [JsonProperty("href")]
         public string Href { get; set; }
