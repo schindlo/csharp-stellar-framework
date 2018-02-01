@@ -12,16 +12,17 @@ namespace csharp_stellar_base.Tests
         [Fact]
         public async void TestTransactionDetails()
         {
+            // submit a tx
             TransactionCallBuilder builder = new TransactionCallBuilder(horizon_url);
-            // TODO: need valid signed tx
-            builder.submitTransaction("AAAAAOo1QK/3upA74NLkdq4Io3DQAQZPi4TVhuDnvCYQTKIVAAAACgAAH8AAAAABAAAAAAAAAAAAAAABAAAAAQAAAADqNUCv97qQO+DS5HauCKNw0AEGT4uE1Ybg57wmEEyiFQAAAAEAAAAAZc2EuuEa2W1PAKmaqVquHuzUMHaEiRs//+ODOfgWiz8AAAAAAAAAAAAAA+gAAAAAAAAAARBMohUAAABAPnnZL8uPlS+c/AM02r4EbxnZuXmP6pQHvSGmxdOb0SzyfDB2jUKjDtL+NC7zcMIyw4NjTa9Ebp4lvONEf4yDBA==");
+            builder.submitTransaction("AAAAAFcLS0qmzW99V4KBawGL3vnu5HV1hErXs6aee7M0Bt5YAAAAZABkLeoAAABOAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAzUGPdmsBkfjQvdN8sSpggDJlIwf5MEEyIR81tXx+D5oAAAAAAAAAAACYloAAAAAAAAAAATQG3lgAAABAG73QJD9U8f41h4a6FFsqtww6c9ww4s1lN/YgX9qzxlmEjTsTvwgmlqwanwPJA4TZyCMcmyTUFqwzi/rBdUJ7AQ==");
             var tx = await builder.Call();
-            Console.WriteLine(tx.Hash);
+            Assert.NotNull(tx.Hash);
 
+            // read details of this tx
+            builder = new TransactionCallBuilder(horizon_url);
             builder.transaction(tx.Hash);
             var txDetail = await builder.Call();
-
-            Console.WriteLine(txDetail.Id);
+            Assert.Equal(tx.Hash, txDetail.Hash);
         }
     }
 }
