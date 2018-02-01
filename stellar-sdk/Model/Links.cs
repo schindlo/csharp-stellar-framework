@@ -16,6 +16,12 @@ namespace StellarSdk.Model
         [JsonProperty("self")]
         public LinksData Self { get; set; }
 
+        [JsonProperty("next")]
+        public LinksData Next { get; set; }
+
+        [JsonProperty("prev")]
+        public LinksData Prev { get; set; }
+
         [JsonProperty("succeeds")]
         public LinksData Succeeds { get; set; }
 
