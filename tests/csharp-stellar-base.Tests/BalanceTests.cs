@@ -1,10 +1,7 @@
 ﻿using System;
 using Xunit;
-using Newtonsoft.Json.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using StellarSdk;
-using StellarSdk.Model;
+using StellarSdk.Exceptions;
 
 namespace csharp_stellar_base.Tests
 {

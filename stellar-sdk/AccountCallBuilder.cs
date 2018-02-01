@@ -9,11 +9,12 @@ namespace StellarSdk
         public AccountCallBuilder(String serverUrl) : base(serverUrl)
         {
             isIdempotent = true;
+            addSegment("accounts");
         }
 
         public AccountCallBuilder accountId(String id)
         {
-            filters.Add("accounts", id);
+            addFilter(id);
 
             return this;
         }
