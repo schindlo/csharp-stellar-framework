@@ -10,6 +10,7 @@ namespace StellarSdk
     {
         private String url;
         private List<string> filters;
+        private List<KeyValuePair<string, string>> urlParams;
         private List<KeyValuePair<string, string>> bodyParams;
 
         // services marked as idempotent will be retried in case of transient failures
@@ -19,6 +20,7 @@ namespace StellarSdk
         {
             url = serverUrl;
             filters = new List<string>();
+            urlParams = new List<KeyValuePair<string, string>>();
             bodyParams = new List<KeyValuePair<string, string>>();
             isIdempotent = false;
         }
@@ -31,6 +33,11 @@ namespace StellarSdk
         public void addFilter(string value)
         {
             filters.Add(value);
+        }
+
+        public void addParam(string param, string value)
+        {
+            urlParams.Add(new KeyValuePair<string, string>(param, value));
         }
 
         public void addBody(string param, string value)
@@ -47,6 +54,12 @@ namespace StellarSdk
             if(filters.Count == 1)
             {
                 url = url + "/" + filters[0];
+            }
+
+            for (int i = 0; i < urlParams.Count; i++)
+            {
+                url = url + (i == 0 ? "?" : "&");
+                url = url + urlParams[i].Key + "=" + urlParams[i].Value;
             }
         }
 

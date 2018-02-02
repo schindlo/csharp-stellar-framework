@@ -15,5 +15,10 @@ namespace StellarSdk.Model
             [JsonProperty("records")]
             public LedgerDetails[] Records { get; set; }
         }
+
+        public static AllLedgers FromJson(string json) => JsonConvert.DeserializeObject<AllLedgers>(json, Converter.Settings);
+
+        public static string ToJson(AllLedgers self) => JsonConvert.SerializeObject(self, Converter.Settings);
+
     }
 }
