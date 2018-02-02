@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>0.1.1</PackageVersion>
+    <Authors>Jan Rothen</Authors>
+    <Description>.NET Core Stellar SDK</Description>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>stellar-sdk</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,5 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@
     <Authors>Jan Rothen</Authors>
     <Description>.NET Core Stellar Base</Description>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>0.1.1</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
