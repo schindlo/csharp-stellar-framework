@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using StellarSdk.Exceptions;
+using StellarSdk.Model;
 
 namespace StellarSdk
 {
@@ -103,15 +104,24 @@ namespace StellarSdk
 
                     if (response.IsSuccessStatusCode)
                     {
+                        // OK
                         return await response.Content.ReadAsStringAsync();
                     }
                     else if (((int)response.StatusCode) == 404)
                     {
+                        // not found
                         throw new ResourceNotFoundException();
+                    }
+                    else if (((int)response.StatusCode) == 400)
+                    {
+                        // business error (bad request)
+                        string txt = await response.Content.ReadAsStringAsync();
+                        BadRequestError err = BadRequestError.FromJson(txt);
+                        throw new BadRequestException("Bad request", err);
                     }
                     else if (((int)response.StatusCode) == 500 && attempt < retries)
                     {
-                        // retry
+                        // technical error, retry
                         continue;
                     }
                     else

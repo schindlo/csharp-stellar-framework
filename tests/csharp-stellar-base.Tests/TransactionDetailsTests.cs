@@ -24,5 +24,23 @@ namespace csharp_stellar_base.Tests
             var txDetail = await builder.Call();
             Assert.Equal(tx.Hash, txDetail.Hash);
         }
+
+        [Fact]
+        public async void TestInvalidTransaction()
+        {
+            // submit an invalid tx
+            TransactionCallBuilder builder = new TransactionCallBuilder(horizon_url);
+            builder.submitTransaction("invalid tx test");
+            try
+            {
+                await builder.Call();
+                Assert.Equal("Expected BadRequestException", null);
+            }
+            catch(BadRequestException e)
+            {
+                Assert.Equal(400, e.ErrorDetails.Status);
+                Assert.NotNull(e.ErrorDetails.Title);
+            }
+        }
     }
 }
