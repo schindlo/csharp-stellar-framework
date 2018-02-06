@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>0.1.4</PackageVersion>
+    <PackageVersion>0.1.5</PackageVersion>
     <Authors>Jan Rothen</Authors>
     <Description>.NET Core Stellar SDK</Description>
     <PackOnBuild>true</PackOnBuild>
