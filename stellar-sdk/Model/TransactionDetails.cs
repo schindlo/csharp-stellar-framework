@@ -53,6 +53,15 @@ namespace StellarSdk.Model
         [JsonProperty("result_meta_xdr")]
         public string ResultMetaXdr { get; set; }
 
+        [JsonProperty("fee_meta_xdr")]
+        public string FeeMetaXdr { get; set; }
+
+        [JsonProperty("memo_type")]
+        public string MemoType { get; set; }
+
+        [JsonProperty("memo")]
+        public string Memo { get; set; }
+
         public static TransactionDetails FromJson(string json) => JsonConvert.DeserializeObject<TransactionDetails>(json, Converter.Settings);
 
         public static string ToJson(TransactionDetails self) => JsonConvert.SerializeObject(self, Converter.Settings);

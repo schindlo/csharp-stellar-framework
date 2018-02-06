@@ -51,6 +51,9 @@ namespace StellarSdk.Model
             [JsonProperty("account")]
             public string Account { get; set; }
 
+            [JsonProperty("into")]
+            public string Into { get; set; }
+
             [JsonProperty("asset_type")]
             public string AssetType { get; set; }
 
