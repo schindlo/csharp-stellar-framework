@@ -2,12 +2,14 @@
 using Xunit;
 using StellarSdk;
 using StellarSdk.Exceptions;
+using Stellar;
 
 namespace csharp_stellar_base.Tests
 {
     public class TransactionDetailsTests
     {
         static string horizon_url = "https://horizon-testnet.stellar.org/";
+        static string network_passphrase = "Test SDF Network ; September 2015";
 
         [Fact]
         public async void TestTransactionDetails()
@@ -26,7 +28,7 @@ namespace csharp_stellar_base.Tests
         }
 
         [Fact]
-        public async void TestInvalidTransaction()
+        public async void TestSubmitInvalidTransaction()
         {
             // submit an invalid tx
             TransactionCallBuilder builder = new TransactionCallBuilder(horizon_url);
@@ -40,6 +42,51 @@ namespace csharp_stellar_base.Tests
             {
                 Assert.Equal(400, e.ErrorDetails.Status);
                 Assert.NotNull(e.ErrorDetails.Title);
+            }
+        }
+
+        [Fact]
+        public async void TestSubmitTransactionMissingAmount()
+        {
+            Stellar.Network.CurrentNetwork = network_passphrase;
+
+            AccountCallBuilder accountBuilder = new AccountCallBuilder(horizon_url);
+            accountBuilder.accountId("GBLQWS2KU3GW67KXQKAWWAML33465ZDVOWCEVV5TU2PHXMZUA3PFQM5C");
+            var t = await accountBuilder.Call();
+
+
+            var sourceKeyPair = KeyPair.FromSeed("SDMJOANF6CDRHWVG3N6I34VHFEWD2KK5I5SPGFU5FDB6SY5FJNXTWN24");
+            Account sourceAccount = new Account(sourceKeyPair, long.Parse(t.Sequence));
+
+            var destinationKeyPair = KeyPair.FromAddress("GDGUDD3WNMAZD6GQXXJXZMJKMCADEZJDA74TAQJSEEPTLNL4PYHZVM4T");
+
+            // make payment with amount > source balance
+            double amount = double.Parse(t.Balances[0].Balance);
+            var operation =
+                new PaymentOperation.Builder(destinationKeyPair, new Asset(), (long)(amount * Stellar.One.Value) + 10)
+                .SetSourceAccount(sourceKeyPair)
+                .Build();
+
+            sourceAccount.IncrementSequenceNumber();
+            var transaction = new Stellar.Transaction.Builder(sourceAccount)
+                .AddOperation(operation)
+                .Build();
+            
+            transaction.Sign(sourceAccount.KeyPair);
+            var txSigned = transaction.ToEnvelopeXdrBase64();
+
+            TransactionCallBuilder txBuilder = new TransactionCallBuilder(horizon_url);
+            txBuilder.submitTransaction(txSigned);
+            try
+            {
+                var tx = await txBuilder.Call();
+                Assert.Equal("Expected BadRequestException", null);
+            }
+            catch (BadRequestException e)
+            {
+                Assert.Equal(400, e.ErrorDetails.Status);
+                Assert.Equal("tx_failed", e.ErrorDetails.Extras.ResultCodes.Transaction);
+                Assert.Equal("op_underfunded", e.ErrorDetails.Extras.ResultCodes.Operations[0]);
             }
         }
     }

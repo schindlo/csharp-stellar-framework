@@ -19,8 +19,29 @@ namespace StellarSdk.Model
         [JsonProperty("instance")]
         public string Instance { get; set; }
 
-        //[JsonProperty("extras")]
-        //public Extras Extras { get; set; }
+        [JsonProperty("extras")]
+        public ExtrasData Extras { get; set; }
+
+        public class ExtrasData
+        {
+            [JsonProperty("envelope_xdr")]
+            public string EnvelopeXdr { get; set; }
+
+            [JsonProperty("result_codes")]
+            public ResultCodes ResultCodes { get; set; }
+
+            [JsonProperty("result_xdr")]
+            public string ResultXdr { get; set; }
+        }
+
+        public partial class ResultCodes
+        {
+            [JsonProperty("transaction")]
+            public string Transaction { get; set; }
+
+            [JsonProperty("operations")]
+            public string[] Operations { get; set; }
+        }
 
         public static BadRequestError FromJson(string json) => JsonConvert.DeserializeObject<BadRequestError>(json, Converter.Settings);
 
