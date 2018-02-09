@@ -5,7 +5,7 @@
 using System;
 using System.Text;
 
-namespace Stellar.Generated
+namespace StellarBase.Generated
 {
 	public static class XdrEncoding
 	{

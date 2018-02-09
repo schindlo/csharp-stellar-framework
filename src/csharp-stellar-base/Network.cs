@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Stellar
+namespace StellarBase
 {
     public static class Network
     {

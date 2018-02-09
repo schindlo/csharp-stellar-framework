@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Stellar;
+using StellarBase;
 using System;
 
 namespace csharp_stellar_base.Tests

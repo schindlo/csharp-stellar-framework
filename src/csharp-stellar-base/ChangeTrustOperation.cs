@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Stellar.Preconditions;
+using static StellarBase.Preconditions;
 
-namespace Stellar
+namespace StellarBase
 {
     public class ChangeTrustOperation : Operation
     {
@@ -48,7 +48,7 @@ namespace Stellar
 
             public Builder(Generated.ChangeTrustOp op)
             {
-                Asset = Stellar.Asset.FromXDR(op.Line);
+                Asset = StellarBase.Asset.FromXDR(op.Line);
                 Limit = op.Limit.InnerValue;
             }
 

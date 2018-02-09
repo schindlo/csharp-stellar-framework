@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Stellar;
+using StellarBase;
 using System;
 using System.Text;
 
@@ -29,8 +29,8 @@ namespace csharp_stellar_base.Tests
             Assert.Equal("AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAYAAAABRVVSAAAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAAAAABk",
                     operation.ToXdrBase64());
 
-            Stellar.Generated.Operation xdr = operation.ToXDR();
-            ChangeTrustOperation parsedOperation = Stellar.ChangeTrustOperation.FromXDR(xdr);
+            StellarBase.Generated.Operation xdr = operation.ToXDR();
+            ChangeTrustOperation parsedOperation = StellarBase.ChangeTrustOperation.FromXDR(xdr);
 
             Assert.Equal(source.Address, parsedOperation.SourceAccount.Address);
             Assert.Equal("EUR", parsedOperation.Asset.Code);
@@ -101,8 +101,8 @@ namespace csharp_stellar_base.Tests
             Assert.Equal("AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAAAAAAA7eBSYbzcL5UKo7oXO24y1ckX+XuCtkDsyNHOp1n1bxAAAAAAAAAD6A==",
                     operation.ToXdrBase64());
 
-            Stellar.Generated.Operation xdr = operation.ToXDR();
-            CreateAccountOperation parsedOperation = Stellar.CreateAccountOperation.FromXDR(xdr);
+            StellarBase.Generated.Operation xdr = operation.ToXDR();
+            CreateAccountOperation parsedOperation = StellarBase.CreateAccountOperation.FromXDR(xdr);
 
             Assert.Equal(source.Address, parsedOperation.SourceAccount.Address);
             Assert.Equal(destination.Address, parsedOperation.Destination.Address);
@@ -157,7 +157,7 @@ namespace csharp_stellar_base.Tests
             // GDW6AUTBXTOC7FIKUO5BOO3OGLK4SF7ZPOBLMQHMZDI45J2Z6VXRB5NR
             KeyPair destination = KeyPair.FromSeed("SDHZGHURAYXKU2KMVHPOXI6JG2Q4BSQUQCEOY72O3QQTCLR2T455PMII");
 
-            Asset asset = new Stellar.Asset();
+            Asset asset = new StellarBase.Asset();
             long amount = 1000;
 
             PaymentOperation operation = new PaymentOperation.Builder(destination, asset, amount)
@@ -172,8 +172,8 @@ namespace csharp_stellar_base.Tests
                     "AAAAAQAAAAC7JAuE3XvquOnbsgv2SRztjuk4RoBVefQ0rlrFMMQvfAAAAAEAAAAA7eBSYbzcL5UKo7oXO24y1ckX+XuCtkDsyNHOp1n1bxAAAAAAAAAAAAAAA+g=",
                     operation.ToXdrBase64());
 
-            Stellar.Generated.Operation xdr = operation.ToXDR();
-            PaymentOperation parsedOperation = Stellar.PaymentOperation.FromXDR(xdr);
+            StellarBase.Generated.Operation xdr = operation.ToXDR();
+            PaymentOperation parsedOperation = StellarBase.PaymentOperation.FromXDR(xdr);
 
             Assert.Equal(source.Address, parsedOperation.SourceAccount.Address);
             Assert.Equal(destination.Address, parsedOperation.Destination.Address);
@@ -187,7 +187,7 @@ namespace csharp_stellar_base.Tests
             // GC5SIC4E3V56VOHJ3OZAX5SJDTWY52JYI2AFK6PUGSXFVRJQYQXXZBZF
             KeyPair source = KeyPair.FromSeed("SC4CGETADVYTCR5HEAVZRB3DZQY5Y4J7RFNJTRA6ESMHIPEZUSTE2QDK");
 
-            Asset asset = new Stellar.Asset();
+            Asset asset = new StellarBase.Asset();
             long amount = 1000;
             
             var ex = Assert.Throws<NullReferenceException>(() => new PaymentOperation.Builder(null, asset, amount)
@@ -220,7 +220,7 @@ namespace csharp_stellar_base.Tests
             // GDW6AUTBXTOC7FIKUO5BOO3OGLK4SF7ZPOBLMQHMZDI45J2Z6VXRB5NR
             KeyPair destination = KeyPair.FromSeed("SDHZGHURAYXKU2KMVHPOXI6JG2Q4BSQUQCEOY72O3QQTCLR2T455PMII");
 
-            Asset asset = new Stellar.Asset();
+            Asset asset = new StellarBase.Asset();
 
             var ex = Assert.Throws<ArgumentException>(() => new PaymentOperation.Builder(destination, asset, -1)
                 .SetSourceAccount(source)
@@ -234,7 +234,7 @@ namespace csharp_stellar_base.Tests
             // GDW6AUTBXTOC7FIKUO5BOO3OGLK4SF7ZPOBLMQHMZDI45J2Z6VXRB5NR
             KeyPair destination = KeyPair.FromSeed("SDHZGHURAYXKU2KMVHPOXI6JG2Q4BSQUQCEOY72O3QQTCLR2T455PMII");
 
-            Asset asset = new Stellar.Asset();
+            Asset asset = new StellarBase.Asset();
             long amount = 1000;
             
             var ex = Assert.Throws<NullReferenceException>(() => new PaymentOperation.Builder(destination, asset, amount)

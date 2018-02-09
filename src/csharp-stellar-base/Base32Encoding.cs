@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Stellar
+namespace StellarBase
 {
     public static class Base32Encoding
     {

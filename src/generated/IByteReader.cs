@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Stellar.Generated
+namespace StellarBase.Generated
 {
 	public interface IByteReader
 	{

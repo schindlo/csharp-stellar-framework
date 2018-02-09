@@ -1,6 +1,6 @@
-﻿using static Stellar.Preconditions;
+﻿using static StellarBase.Preconditions;
 
-namespace Stellar
+namespace StellarBase
 {
     public class Account : ITransactionBuilderAccount
     {

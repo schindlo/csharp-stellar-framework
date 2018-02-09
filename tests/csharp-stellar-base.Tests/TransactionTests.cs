@@ -1,6 +1,6 @@
 ﻿using Xunit;
-using Stellar;
-using Stellar.Generated;
+using StellarBase;
+using StellarBase.Generated;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +13,12 @@ namespace csharp_stellar_base.Tests
     {
         public TransactionTests()
         {
-            Stellar.Network.CurrentNetwork = "";
+            StellarBase.Network.CurrentNetwork = "";
         }
 
-        public Stellar.Transaction SampleTransaction(string destAccountId)
+        public StellarBase.Transaction SampleTransaction(string destAccountId)
         {
-            Stellar.Network.CurrentNetwork = "";
+            StellarBase.Network.CurrentNetwork = "";
 
             var master = KeyPair.Master();
             var dest = string.IsNullOrEmpty(destAccountId) ? KeyPair.Random() : KeyPair.FromAccountId(destAccountId);
@@ -30,8 +30,8 @@ namespace csharp_stellar_base.Tests
                 //.SetSourceAccount(master)
                 .Build();
 
-            Stellar.Transaction transaction =
-                new Stellar.Transaction.Builder(sourceAccount)
+            StellarBase.Transaction transaction =
+                new StellarBase.Transaction.Builder(sourceAccount)
                 .AddOperation(operation)
                 .Build();
 
@@ -44,15 +44,15 @@ namespace csharp_stellar_base.Tests
             var transaction = SampleTransaction("GDICFS3KJ3ZTW4COVPUX7OCOAZKLLNFAM5FIYSN5FKKM7M7QNXLBPCCH");
             var txXdr = transaction.ToXDR();
 
-            var writer = new Stellar.Generated.ByteWriter();
-            Stellar.Generated.Transaction.Encode(writer, txXdr);
+            var writer = new StellarBase.Generated.ByteWriter();
+            StellarBase.Generated.Transaction.Encode(writer, txXdr);
             string sig64 = Convert.ToBase64String(writer.ToArray());
 
             string sigSample64 = "AAAAAL6Qe0ushP7lzogR2y3vyb8LKiorvD1U2KIlfs1wRBliAAAAZAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA0CLLak7zO3BOq+l/uE4GVLW0oGdKjEm9KpTPs/Bt1hcAAAAAAAAD6AAAAAA=";
             byte[] sigSample = Convert.FromBase64String(sigSample64);
 
-            var reader = new Stellar.Generated.ByteReader(sigSample);
-            var sampleTx = Stellar.Generated.Transaction.Decode(reader);
+            var reader = new StellarBase.Generated.ByteReader(sigSample);
+            var sampleTx = StellarBase.Generated.Transaction.Decode(reader);
 
             Assert.Equal(writer.ToArray(), sigSample);
 

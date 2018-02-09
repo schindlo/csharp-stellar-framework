@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-namespace Stellar.Generated
+namespace StellarBase.Generated
 {
 	public class ByteWriter: IByteWriter
 	{

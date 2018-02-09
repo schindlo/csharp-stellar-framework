@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Stellar;
+using StellarBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,9 @@ namespace csharp_stellar_base.Tests
 
             Assert.Equal(Memo.MemoTypeEnum.MEMO_NONE, memo.Type);
 
-            Stellar.Generated.Memo genMemo = memo.ToXDR();
+            StellarBase.Generated.Memo genMemo = memo.ToXDR();
 
-            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_NONE, genMemo.Discriminant.InnerValue);
+            Assert.Equal(StellarBase.Generated.MemoType.MemoTypeEnum.MEMO_NONE, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
@@ -35,10 +35,10 @@ namespace csharp_stellar_base.Tests
             Assert.Equal(text, memo.Text);
             Assert.Equal(Memo.MemoTypeEnum.MEMO_TEXT, memo.Type);
 
-            Stellar.Generated.Memo genMemo = memo.ToXDR();
+            StellarBase.Generated.Memo genMemo = memo.ToXDR();
 
             Assert.Equal(text, genMemo.Text);
-            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_TEXT, genMemo.Discriminant.InnerValue);
+            Assert.Equal(StellarBase.Generated.MemoType.MemoTypeEnum.MEMO_TEXT, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
@@ -62,10 +62,10 @@ namespace csharp_stellar_base.Tests
             Assert.Equal(id, memo.Id);
             Assert.Equal(Memo.MemoTypeEnum.MEMO_ID, memo.Type);
 
-            Stellar.Generated.Memo genMemo = memo.ToXDR();
+            StellarBase.Generated.Memo genMemo = memo.ToXDR();
 
-            Assert.Equal(new Stellar.Generated.Uint64((ulong)id).InnerValue, genMemo.Id.InnerValue);
-            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_ID, genMemo.Discriminant.InnerValue);
+            Assert.Equal(new StellarBase.Generated.Uint64((ulong)id).InnerValue, genMemo.Id.InnerValue);
+            Assert.Equal(StellarBase.Generated.MemoType.MemoTypeEnum.MEMO_ID, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
@@ -89,10 +89,10 @@ namespace csharp_stellar_base.Tests
             Assert.Equal(hash, memo.Hash);
             Assert.Equal(Memo.MemoTypeEnum.MEMO_HASH, memo.Type);
 
-            Stellar.Generated.Memo genMemo = memo.ToXDR();
+            StellarBase.Generated.Memo genMemo = memo.ToXDR();
 
             Assert.Equal(Encoding.ASCII.GetBytes(hash).ToString(), genMemo.Hash.InnerValue.ToString());
-            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_HASH, genMemo.Discriminant.InnerValue);
+            Assert.Equal(StellarBase.Generated.MemoType.MemoTypeEnum.MEMO_HASH, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 
@@ -123,10 +123,10 @@ namespace csharp_stellar_base.Tests
             Assert.Equal(retHash, memo.RetHash);
             Assert.Equal(Memo.MemoTypeEnum.MEMO_RETURN, memo.Type);
 
-            Stellar.Generated.Memo genMemo = memo.ToXDR();
+            StellarBase.Generated.Memo genMemo = memo.ToXDR();
 
             Assert.Equal(Encoding.ASCII.GetBytes(retHash).ToString(), genMemo.RetHash.InnerValue.ToString());
-            Assert.Equal(Stellar.Generated.MemoType.MemoTypeEnum.MEMO_RETURN, genMemo.Discriminant.InnerValue);
+            Assert.Equal(StellarBase.Generated.MemoType.MemoTypeEnum.MEMO_RETURN, genMemo.Discriminant.InnerValue);
 
             Memo resMemo = Memo.FromXDR(genMemo);
 

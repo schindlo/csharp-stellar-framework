@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Stellar.Preconditions;
+using static StellarBase.Preconditions;
 
-namespace Stellar
+namespace StellarBase
 {
     public class Asset
     {
@@ -55,7 +55,7 @@ namespace Stellar
                     return new Generated.Asset
                     {
                         Discriminant = Generated.AssetType.Create(Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4),
-                        AlphaNum4 = new Stellar.Generated.Asset.AssetAlphaNum4
+                        AlphaNum4 = new StellarBase.Generated.Asset.AssetAlphaNum4
                         {
                             AssetCode = Encoding.ASCII.GetBytes(Code),
                             Issuer = new Generated.AccountID
@@ -72,7 +72,7 @@ namespace Stellar
                     return new Generated.Asset
                     {
                         Discriminant = Generated.AssetType.Create(Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12),
-                        AlphaNum12 = new Stellar.Generated.Asset.AssetAlphaNum12
+                        AlphaNum12 = new StellarBase.Generated.Asset.AssetAlphaNum12
                         {
                             AssetCode = Encoding.ASCII.GetBytes(Code),
                             Issuer = new Generated.AccountID

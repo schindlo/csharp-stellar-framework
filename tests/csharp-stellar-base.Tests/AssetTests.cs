@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Stellar;
+using StellarBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,9 @@ namespace csharp_stellar_base.Tests
 
             Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_NATIVE, asset.Type);
 
-            Stellar.Generated.Asset genAsset = asset.ToXDR();
+            StellarBase.Generated.Asset genAsset = asset.ToXDR();
 
-            Assert.Equal(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_NATIVE, genAsset.Discriminant.InnerValue);
+            Assert.Equal(StellarBase.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_NATIVE, genAsset.Discriminant.InnerValue);
 
             Asset resAsset = Asset.FromXDR(genAsset);
 
@@ -37,11 +37,11 @@ namespace csharp_stellar_base.Tests
             Assert.Equal(keyPair, asset.Issuer);
             Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, asset.Type);
 
-            Stellar.Generated.Asset genAsset = asset.ToXDR();
+            StellarBase.Generated.Asset genAsset = asset.ToXDR();
 
             Assert.Equal(Encoding.ASCII.GetBytes(code).ToString(), genAsset.AlphaNum4.AssetCode.ToString());
             Assert.Equal(keyPair.PublicKey.ToString(), genAsset.AlphaNum4.Issuer.InnerValue.Ed25519.InnerValue.ToString());
-            Assert.Equal(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, genAsset.Discriminant.InnerValue);
+            Assert.Equal(StellarBase.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM4, genAsset.Discriminant.InnerValue);
 
             Asset resAsset = Asset.FromXDR(genAsset);
 
@@ -62,11 +62,11 @@ namespace csharp_stellar_base.Tests
             Assert.Equal(keyPair, asset.Issuer);
             Assert.Equal(Asset.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, asset.Type);
 
-            Stellar.Generated.Asset genAsset = asset.ToXDR();
+            StellarBase.Generated.Asset genAsset = asset.ToXDR();
 
             Assert.Equal(Encoding.ASCII.GetBytes(code).ToString(), genAsset.AlphaNum12.AssetCode.ToString());
             Assert.Equal(keyPair.PublicKey.ToString(), genAsset.AlphaNum12.Issuer.InnerValue.Ed25519.InnerValue.ToString());
-            Assert.Equal(Stellar.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, genAsset.Discriminant.InnerValue);
+            Assert.Equal(StellarBase.Generated.AssetType.AssetTypeEnum.ASSET_TYPE_CREDIT_ALPHANUM12, genAsset.Discriminant.InnerValue);
 
             Asset resAsset = Asset.FromXDR(genAsset);
 

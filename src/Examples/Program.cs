@@ -1,4 +1,4 @@
-﻿using Stellar;
+﻿using StellarBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +18,15 @@ namespace Examples
 
         static void Main(string[] args)
         {
-            Stellar.Network.CurrentNetwork = network_passphrase;
+            StellarBase.Network.CurrentNetwork = network_passphrase;
 
             // seed from account on the testnetwork
             var myKeyPair = KeyPair.FromSeed("SDMJOANF6CDRHWVG3N6I34VHFEWD2KK5I5SPGFU5FDB6SY5FJNXTWN24");
             Account myAccount = new Account(myKeyPair, GetSequence(myKeyPair.Address));
 
-            var randomAccountKeyPair = CreateRandomAccount(myAccount, 1000 * Stellar.One.Value);
+            var randomAccountKeyPair = CreateRandomAccount(myAccount, 1000 * StellarBase.One.Value);
 
-            Payment(myKeyPair, randomAccountKeyPair, 10 * Stellar.One.Value);
+            Payment(myKeyPair, randomAccountKeyPair, 10 * StellarBase.One.Value);
 
             // Wait for input to prevent the cmd window from closing
             Console.Read();
@@ -73,8 +73,8 @@ namespace Examples
 
             source.IncrementSequenceNumber();
 
-            Stellar.Transaction transaction =
-                new Stellar.Transaction.Builder(source)
+            StellarBase.Transaction transaction =
+                new StellarBase.Transaction.Builder(source)
                 .AddOperation(operation)
                 .Build();
 
@@ -94,16 +94,16 @@ namespace Examples
         private static void DecodeTransactionResult(string result)
         {
             var bytes = Convert.FromBase64String(result);
-            var reader = new Stellar.Generated.ByteReader(bytes);
-            var txResult = Stellar.Generated.TransactionResult.Decode(reader);
+            var reader = new StellarBase.Generated.ByteReader(bytes);
+            var txResult = StellarBase.Generated.TransactionResult.Decode(reader);
 
         }
 
         private static void DecodeTxFee(string result)
         {
             var bytes = Convert.FromBase64String(result);
-            var reader = new Stellar.Generated.ByteReader(bytes);
-            var txResult = Stellar.Generated.LedgerEntryChanges.Decode(reader);
+            var reader = new StellarBase.Generated.ByteReader(bytes);
+            var txResult = StellarBase.Generated.LedgerEntryChanges.Decode(reader);
 
         }
 
@@ -121,8 +121,8 @@ namespace Examples
 
             source.IncrementSequenceNumber();
 
-            Stellar.Transaction transaction =
-                new Stellar.Transaction.Builder(source)
+            StellarBase.Transaction transaction =
+                new StellarBase.Transaction.Builder(source)
                 .AddOperation(operation)
                 .Build();
 
@@ -144,8 +144,8 @@ namespace Examples
 
             source.IncrementSequenceNumber();
 
-            Stellar.Transaction transaction =
-                new Stellar.Transaction.Builder(source)
+            StellarBase.Transaction transaction =
+                new StellarBase.Transaction.Builder(source)
                 .AddOperation(operation)
                 .Build();
 

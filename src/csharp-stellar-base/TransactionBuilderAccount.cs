@@ -1,4 +1,4 @@
-﻿namespace Stellar
+﻿namespace StellarBase
 {
     public interface ITransactionBuilderAccount
     {

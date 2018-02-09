@@ -1,11 +1,11 @@
-﻿using Stellar;
+﻿using StellarBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stellar
+namespace StellarBase
 {
     public enum VersionByte
     {

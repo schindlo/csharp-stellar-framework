@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Stellar.Preconditions;
+using static StellarBase.Preconditions;
 
-namespace Stellar
+namespace StellarBase
 {
     public class PaymentOperation : Operation
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Stellar
+namespace StellarBase
 {
     public class NotEnoughSignaturesException : Exception
     {

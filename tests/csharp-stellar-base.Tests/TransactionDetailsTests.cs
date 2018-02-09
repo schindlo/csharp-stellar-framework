@@ -2,7 +2,7 @@
 using Xunit;
 using StellarSdk;
 using StellarSdk.Exceptions;
-using Stellar;
+using StellarBase;
 
 namespace csharp_stellar_base.Tests
 {
@@ -48,7 +48,7 @@ namespace csharp_stellar_base.Tests
         [Fact]
         public async void TestSubmitTransactionMissingAmount()
         {
-            Stellar.Network.CurrentNetwork = network_passphrase;
+            StellarBase.Network.CurrentNetwork = network_passphrase;
 
             AccountCallBuilder accountBuilder = new AccountCallBuilder(horizon_url);
             accountBuilder.accountId("GBLQWS2KU3GW67KXQKAWWAML33465ZDVOWCEVV5TU2PHXMZUA3PFQM5C");
@@ -63,12 +63,12 @@ namespace csharp_stellar_base.Tests
             // make payment with amount > source balance
             double amount = double.Parse(t.Balances[0].Balance);
             var operation =
-                new PaymentOperation.Builder(destinationKeyPair, new Asset(), (long)(amount * Stellar.One.Value) + 10)
+                new PaymentOperation.Builder(destinationKeyPair, new Asset(), (long)(amount * StellarBase.One.Value) + 10)
                 .SetSourceAccount(sourceKeyPair)
                 .Build();
 
             sourceAccount.IncrementSequenceNumber();
-            var transaction = new Stellar.Transaction.Builder(sourceAccount)
+            var transaction = new StellarBase.Transaction.Builder(sourceAccount)
                 .AddOperation(operation)
                 .Build();
             

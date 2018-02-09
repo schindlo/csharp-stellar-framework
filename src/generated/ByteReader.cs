@@ -5,7 +5,7 @@
 using System;
 using System.IO;
 
-namespace Stellar.Generated
+namespace StellarBase.Generated
 {
 	public class ByteReader: IByteReader
 	{

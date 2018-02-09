@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Stellar.Preconditions;
+using static StellarBase.Preconditions;
 
-namespace Stellar
+namespace StellarBase
 {
     public class Transaction
     {
@@ -33,7 +33,7 @@ namespace Stellar
 
             mFee = operations.Length * BASE_FEE;
             mSignatures = new List<Generated.DecoratedSignature>();
-            Memo = memo != null ? memo : Stellar.Memo.MemoNone();
+            Memo = memo != null ? memo : StellarBase.Memo.MemoNone();
         }
 
         /// <summary>
