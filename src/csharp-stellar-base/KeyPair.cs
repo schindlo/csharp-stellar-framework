@@ -166,14 +166,12 @@ namespace StellarBase
             return new KeyPair(bytes);
         }
 
-        [Obsolete("Use FromPublickey instead.")]
         public static KeyPair FromAccountId(string accountId)
         {
             var bytes = StrKey.DecodeCheck(VersionByte.ed25519Publickey, accountId);
             return FromPublicKey(bytes);
         }
 
-        [Obsolete("Use FromPublickey instead.")]
         public static KeyPair FromAddress(string accountId)
         {
             return FromAccountId(accountId);
