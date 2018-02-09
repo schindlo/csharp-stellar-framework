@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "src\Examples\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-stellar-base.Tests", "tests\csharp-stellar-base.Tests\csharp-stellar-base.Tests.csproj", "{79782E6D-437F-40AE-B338-F89E2CB58744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stellar-sdk", "stellar-sdk\stellar-sdk.csproj", "{7A5D0528-261C-49D4-9515-A651807DBA04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-stellar-sdk", "src\csharp-stellar-sdk\csharp-stellar-sdk.csproj", "{32C53670-E047-4D24-9AEA-82CF436620E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,9 +55,9 @@ Global
 		{79782E6D-437F-40AE-B338-F89E2CB58744}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79782E6D-437F-40AE-B338-F89E2CB58744}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79782E6D-437F-40AE-B338-F89E2CB58744}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A5D0528-261C-49D4-9515-A651807DBA04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A5D0528-261C-49D4-9515-A651807DBA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A5D0528-261C-49D4-9515-A651807DBA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A5D0528-261C-49D4-9515-A651807DBA04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32C53670-E047-4D24-9AEA-82CF436620E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C53670-E047-4D24-9AEA-82CF436620E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32C53670-E047-4D24-9AEA-82CF436620E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C53670-E047-4D24-9AEA-82CF436620E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -17,6 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\csharp-stellar-base\csharp-stellar-base.csproj" />
-    <ProjectReference Include="..\..\stellar-sdk\stellar-sdk.csproj" />
+    <ProjectReference Include="..\..\src\csharp-stellar-sdk\csharp-stellar-sdk.csproj" />
   </ItemGroup>
 </Project>
