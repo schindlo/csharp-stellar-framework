@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>0.1.6</PackageVersion>
-    <Authors>Jan Rothen</Authors>
-    <Description>.NET Core Stellar SDK</Description>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Oliver Schindler</Authors>
+    <Description>.NET Standard 2.0 Stellar SDK</Description>
     <PackOnBuild>true</PackOnBuild>
-    <PackageId>stellar-sdk</PackageId>
+    <PackageId>csharp-stellar-sdk</PackageId>
     <RootNamespace>StellarSdk</RootNamespace>
   </PropertyGroup>
 
