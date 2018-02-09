@@ -1,12 +1,8 @@
-﻿using Xunit;
-using StellarBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Text;
-using System.Threading.Tasks;
+using Xunit;
 
-namespace csharp_stellar_base.Tests
+namespace StellarBase.Tests.Tests
 {
     public class AssetTests
     {

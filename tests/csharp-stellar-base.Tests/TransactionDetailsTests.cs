@@ -1,10 +1,8 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using StellarSdk;
 using StellarSdk.Exceptions;
-using StellarBase;
 
-namespace csharp_stellar_base.Tests
+namespace StellarBase.Tests
 {
     public class TransactionDetailsTests
     {

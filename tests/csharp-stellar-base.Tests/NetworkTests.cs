@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace csharp_stellar_base.Tests
+namespace StellarBs.Tests
 {
     public class NetworkTests
     {

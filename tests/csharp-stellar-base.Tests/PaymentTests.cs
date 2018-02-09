@@ -1,8 +1,7 @@
-﻿using System;
+﻿using StellarSdk;
 using Xunit;
-using StellarSdk;
 
-namespace csharp_stellar_base.Tests
+namespace StellarBase.Tests.Tests
 {
     public class PaymentTests
     {

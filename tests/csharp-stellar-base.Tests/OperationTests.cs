@@ -1,9 +1,7 @@
-﻿using Xunit;
-using StellarBase;
-using System;
-using System.Text;
+﻿using System;
+using Xunit;
 
-namespace csharp_stellar_base.Tests
+namespace StellarBase.Tests.Tests
 {
     public class OperationTests
     {

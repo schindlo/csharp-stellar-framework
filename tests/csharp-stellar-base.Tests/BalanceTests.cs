@@ -3,7 +3,7 @@ using Xunit;
 using StellarSdk;
 using StellarSdk.Exceptions;
 
-namespace csharp_stellar_base.Tests
+namespace StellarBase.Tests.Tests
 {
     public class BalanceTests
     {

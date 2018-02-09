@@ -1,13 +1,7 @@
 ﻿using Xunit;
-using StellarBase;
-using StellarBase.Generated;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace csharp_stellar_base.Tests
+namespace StellarBase.Tests.Tests
 {
     public class TransactionTests
     {
