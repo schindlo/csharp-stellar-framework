@@ -1,12 +1,18 @@
-# csharp-stellar-base
-Quick and dirty library to create, encode and decode Stellar transactions
+# csharp-stellar-framework
+Library to create, encode and decode Stellar transactions as well as to interact
+with the Horizon REST Api.
 
+This code bases on a fork of https://github.com/QuantozTechnology/csharp-stellar-base
 
 # Dependencies
-- .NET 2.0
+- .NET Standard 2.0
+
+# Nuget
+- https://www.nuget.org/packages/csharp-stellar-base/
+- https://www.nuget.org/packages/csharp-stellar-sdk/
 
 # Usage
-- Open in project Visual Studio (tested in VS 2015)
+- Open in project Visual Studio (tested in VS 2017)
 - Build Solution
 
 # Tests
