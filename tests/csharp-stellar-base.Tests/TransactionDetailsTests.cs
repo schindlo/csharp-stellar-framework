@@ -1,4 +1,5 @@
 ﻿using Xunit;
+using System;
 using StellarSdk;
 using StellarSdk.Exceptions;
 
@@ -86,6 +87,17 @@ namespace StellarBase.Tests
                 Assert.Equal("tx_failed", e.ErrorDetails.Extras.ResultCodes.Transaction);
                 Assert.Equal("op_underfunded", e.ErrorDetails.Extras.ResultCodes.Operations[0]);
             }
+        }
+
+        [Fact]
+        public async void TestAccountTransactions()
+        {
+            AccountTransactionCallBuilder builder = new AccountTransactionCallBuilder(horizon_url);
+            builder.accountId("GBLQWS2KU3GW67KXQKAWWAML33465ZDVOWCEVV5TU2PHXMZUA3PFQM5C");
+            builder.limit(5);
+            var t = await builder.Call();
+
+            Assert.NotNull(t.Embedded.Records[0].SourceAccount);
         }
     }
 }
