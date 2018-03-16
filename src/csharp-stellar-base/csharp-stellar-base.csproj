@@ -8,6 +8,7 @@
     <PackOnBuild>true</PackOnBuild>
     <PackageVersion>1.0.0</PackageVersion>
     <RootNamespace>StellarBase</RootNamespace>
+    <PackageProjectUrl>https://github.com/schindlo/csharp-stellar-framework</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
