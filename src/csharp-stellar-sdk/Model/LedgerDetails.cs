@@ -38,10 +38,10 @@ namespace StellarSdk.Model
         [JsonProperty("fee_pool")]
         public string FeePool { get; set; }
 
-        [JsonProperty("base_fee")]
+        [JsonProperty("base_fee_in_stroops")]
         public long BaseFee { get; set; }
 
-        [JsonProperty("base_reserve")]
+        [JsonProperty("base_reserve_in_stroops")]
         public string BaseReserve { get; set; }
 
         [JsonProperty("max_tx_set_size")]
@@ -49,5 +49,8 @@ namespace StellarSdk.Model
 
         [JsonProperty("protocol_version")]
         public long ProtocolVersion { get; set; }
+
+        [JsonProperty("header_xdr")]
+        public string HeaderXdr { get; set; }
     }
 }
