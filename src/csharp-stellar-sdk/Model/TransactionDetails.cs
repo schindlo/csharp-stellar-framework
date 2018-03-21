@@ -23,26 +23,17 @@ namespace StellarSdk.Model
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
 
-        [JsonProperty("account")]
-        public string Account { get; set; }
+        [JsonProperty("source_account")]
+        public string SourceAccount { get; set; }
 
-        [JsonProperty("account_sequence")]
-        public long AccountSequence { get; set; }
-
-        [JsonProperty("max_fee")]
-        public long MaxFee { get; set; }
+        [JsonProperty("source_account_sequence")]
+        public string SourceAccountSequence { get; set; }
 
         [JsonProperty("fee_paid")]
         public long FeePaid { get; set; }
 
         [JsonProperty("operation_count")]
         public long OperationCount { get; set; }
-
-        [JsonProperty("result_code")]
-        public long ResultCode { get; set; }
-
-        [JsonProperty("result_code_s")]
-        public string ResultCodeS { get; set; }
 
         [JsonProperty("envelope_xdr")]
         public string EnvelopeXdr { get; set; }
@@ -61,6 +52,9 @@ namespace StellarSdk.Model
 
         [JsonProperty("memo")]
         public string Memo { get; set; }
+
+        [JsonProperty("signatures")]
+        public string[] Signatures { get; set; }
 
         public static TransactionDetails FromJson(string json) => JsonConvert.DeserializeObject<TransactionDetails>(json, Converter.Settings);
 

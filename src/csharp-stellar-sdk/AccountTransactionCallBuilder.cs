@@ -41,9 +41,9 @@ namespace StellarSdk
             return this;
         }
 
-        public async Task<AccountTransactionDetails> Call()
+        public async Task<Transactions> Call()
         {
-            return AccountTransactionDetails.FromJson(await base.DoCall());
+            return Transactions.FromJson(await base.DoCall());
         }
     }
 }
