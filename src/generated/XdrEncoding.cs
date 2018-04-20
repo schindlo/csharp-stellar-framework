@@ -196,12 +196,12 @@ namespace StellarBase.Generated
 
         public static string ReadString(IByteReader r, uint max)
         {
-            return Encoding.ASCII.GetString(ReadVarOpaque(r, max));
+            return Encoding.UTF8.GetString(ReadVarOpaque(r, max));
         }
 		
 		public static string ReadString(IByteReader r)
         {
-            return Encoding.ASCII.GetString(ReadVarOpaque(r, uint.MaxValue));
+            return Encoding.UTF8.GetString(ReadVarOpaque(r, uint.MaxValue));
         }
 		
         public static void WriteFixOpaque(IByteWriter w, uint len, byte[] v)
@@ -254,13 +254,12 @@ namespace StellarBase.Generated
 
         public static void WriteString(IByteWriter w, uint max, string v)
         {
-            WriteVarOpaque(w, max, Encoding.ASCII.GetBytes(v));
+            WriteVarOpaque(w, max, Encoding.UTF8.GetBytes(v));
         }
 		
 		public static void WriteString(IByteWriter w, string v)
         {
-            EncodeInt32(v.Length, w);
-            WriteVarOpaque(w, (uint)v.Length, Encoding.ASCII.GetBytes(v));
+            WriteVarOpaque(w, (uint)v.Length, Encoding.UTF8.GetBytes(v));
         }
 		
 		public static void WriteBool(IByteWriter w, bool v)

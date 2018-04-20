@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.3" />
   </ItemGroup>
 </Project>
