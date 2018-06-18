@@ -50,11 +50,11 @@ namespace StellarBase.Tests
             StellarBase.Network.CurrentNetwork = network_passphrase;
 
             AccountCallBuilder accountBuilder = new AccountCallBuilder(horizon_url);
-            accountBuilder.accountId("GBLQWS2KU3GW67KXQKAWWAML33465ZDVOWCEVV5TU2PHXMZUA3PFQM5C");
+			accountBuilder.accountId("GBAB45XKXEGB74QALBHWP7HATWSWXVHWJKO7W6R3ETWJVCZN5FTASVHL");
             var t = await accountBuilder.Call();
 
 
-            var sourceKeyPair = KeyPair.FromSeed("SDMJOANF6CDRHWVG3N6I34VHFEWD2KK5I5SPGFU5FDB6SY5FJNXTWN24");
+			var sourceKeyPair = KeyPair.FromSeed("SAEBUXJNNNZPMX3NDG4TTTV2OGUQIMFPPAHZG4FO4FQECKWK4BOSN5GZ");
             Account sourceAccount = new Account(sourceKeyPair, long.Parse(t.Sequence));
 
             var destinationKeyPair = KeyPair.FromAddress("GDGUDD3WNMAZD6GQXXJXZMJKMCADEZJDA74TAQJSEEPTLNL4PYHZVM4T");
