@@ -259,7 +259,8 @@ namespace StellarBase.Generated
 		
 		public static void WriteString(IByteWriter w, string v)
         {
-            WriteVarOpaque(w, (uint)v.Length, Encoding.UTF8.GetBytes(v));
+			var b = Encoding.UTF8.GetBytes(v);
+			WriteVarOpaque(w, (uint)b.Length, b);
         }
 		
 		public static void WriteBool(IByteWriter w, bool v)
