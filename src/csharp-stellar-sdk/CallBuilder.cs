@@ -29,7 +29,7 @@ namespace StellarSdk
 
         public void addSegment(string segment)
         {
-            url = url + "/" + segment;
+			url += url.EndsWith("/", StringComparison.Ordinal) ? segment : "/" + segment;
         }
 
         public void addFilter(string value)
@@ -72,9 +72,7 @@ namespace StellarSdk
                 url = url + urlParams[i].Key + "=" + urlParams[i].Value;
             }
         }
-
-        // TODO: log errors
-        // TODO: parse 400 error, e.g submit an invalid transaction
+        
         public async Task<String> DoCall()
         {
             this.checkFilter();
@@ -114,7 +112,8 @@ namespace StellarSdk
                     if (response.IsSuccessStatusCode)
                     {
                         // OK
-                        return await response.Content.ReadAsStringAsync();
+						var content = await response.Content.ReadAsStringAsync();
+						return content;
                     }
                     else if (((int)response.StatusCode) == 404)
                     {
